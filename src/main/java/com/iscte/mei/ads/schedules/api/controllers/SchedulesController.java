@@ -1,6 +1,7 @@
 package com.iscte.mei.ads.schedules.api.controllers;
 
 import com.iscte.mei.ads.schedules.api.entities.Schedule;
+import com.iscte.mei.ads.schedules.api.services.SchedulesService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,6 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController(Paths.SCHEDULES_MAPPING)
 public class SchedulesController {
+
+    private final SchedulesService service;
+
+    public SchedulesController(SchedulesService service) {
+        this.service = service;
+    }
 
     @GetMapping
     public Iterable<Schedule> getSchedules() {
