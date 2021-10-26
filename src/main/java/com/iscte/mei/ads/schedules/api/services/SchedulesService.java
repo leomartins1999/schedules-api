@@ -19,4 +19,8 @@ public class SchedulesService {
 
         return repository.save(schedule);
     }
+
+    public Iterable<Schedule> getSchedules() {
+        return repository.findAll();
+    }
 }

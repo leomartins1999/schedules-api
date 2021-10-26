@@ -20,7 +20,7 @@ public class SchedulesController {
 
     @GetMapping
     public Iterable<Schedule> getSchedules() {
-        throw new IllegalStateException();
+        return service.getSchedules();
     }
 
     @PostMapping
