@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS schedule(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(64) NOT NULL
+);

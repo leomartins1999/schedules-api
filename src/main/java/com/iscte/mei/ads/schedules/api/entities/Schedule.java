@@ -5,11 +5,19 @@ import org.springframework.data.annotation.Id;
 public class Schedule {
 
     @Id
-    private final long id;
-    private final String name;
+    private long id;
+    private String name;
 
-    public Schedule(long id, String name) {
-        this.id = id;
+    public Schedule(String name) {
+        this.id = 0;
         this.name = name;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
     }
 }
