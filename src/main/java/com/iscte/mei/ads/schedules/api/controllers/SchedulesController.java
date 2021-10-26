@@ -1,13 +1,15 @@
 package com.iscte.mei.ads.schedules.api.controllers;
 
 import com.iscte.mei.ads.schedules.api.entities.Schedule;
+import com.iscte.mei.ads.schedules.api.models.WriteSchedule;
 import com.iscte.mei.ads.schedules.api.services.SchedulesService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
-@RestController(Paths.SCHEDULES_MAPPING)
+import javax.validation.Valid;
+
+@RestController
+@RequestMapping(Paths.SCHEDULES_MAPPING)
 public class SchedulesController {
 
     private final SchedulesService service;
@@ -19,6 +21,12 @@ public class SchedulesController {
     @GetMapping
     public Iterable<Schedule> getSchedules() {
         throw new IllegalStateException();
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Schedule createSchedule(@RequestBody @Valid WriteSchedule model) {
+        return service.createSchedule(model);
     }
 
     @GetMapping(Paths.SCHEDULE_BY_ID_MAPPING)
@@ -43,11 +51,6 @@ public class SchedulesController {
 
     @GetMapping(Paths.SCORES_FOR_SCHEDULE_MAPPING)
     public Schedule getScoresForSchedule(@PathVariable String id) {
-        throw new IllegalStateException();
-    }
-
-    @PostMapping
-    public Schedule createSchedule() {
         throw new IllegalStateException();
     }
 
