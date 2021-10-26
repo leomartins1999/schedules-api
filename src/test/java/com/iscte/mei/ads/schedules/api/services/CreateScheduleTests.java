@@ -33,7 +33,7 @@ public class CreateScheduleTests {
 
     @Test
     @DisplayName("Create a Schedule")
-    public void createSchedule() {
+    public void createScheduleTest() {
         WriteSchedule schedule = new WriteSchedule("schedule-name");
 
         Schedule result = service.createSchedule(schedule);
@@ -47,7 +47,7 @@ public class CreateScheduleTests {
 
     @Test
     @DisplayName("Create schedules with equal names")
-    public void createMultipleSchedules() {
+    public void createMultipleSchedulesTest() {
         WriteSchedule schedule = new WriteSchedule("schedule-name");
 
         Schedule first = service.createSchedule(schedule);
