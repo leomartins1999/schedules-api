@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.util.NoSuchElementException;
+
 @ControllerAdvice
 public class ExceptionController {
 
@@ -18,5 +20,12 @@ public class ExceptionController {
     )
     public void illegalArgumentException(IllegalArgumentException ex) {
         logger.error("Exception thrown:", ex);
+    }
+
+    @ExceptionHandler(NoSuchElementException.class)
+    @ResponseStatus(
+            value = HttpStatus.NOT_FOUND
+    )
+    public void noSuchElementException(NoSuchElementException ex) {
     }
 }

@@ -30,6 +30,10 @@ public class SchedulesService {
         return schedulesRepository.findAll();
     }
 
+    public Schedule getScheduleById(long scheduleId) {
+        return schedulesRepository.findById(scheduleId).get();
+    }
+
     private void saveLectures(long scheduleId, Iterable<Lecture> lectures) {
         Iterable<Lecture> lecturesWithIds = IterableUtils.map(lectures, (lecture -> lecture.withScheduleId(scheduleId)));
 

@@ -44,8 +44,8 @@ public class SchedulesController {
     }
 
     @GetMapping(Paths.SCHEDULE_BY_ID_MAPPING)
-    public Schedule getScheduleById(@PathVariable String id) {
-        throw new IllegalStateException();
+    public Schedule getScheduleById(@PathVariable long id) {
+        return service.getScheduleById(id);
     }
 
     @GetMapping(Paths.CLASSES_FOR_SCHEDULE_MAPPING)
