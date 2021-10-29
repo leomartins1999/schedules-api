@@ -5,8 +5,6 @@ import com.iscte.mei.ads.schedules.api.repositories.LecturesRepository;
 import com.iscte.mei.ads.schedules.api.utils.IterableUtils;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 public class ImportLecturesJob {
 
@@ -16,7 +14,7 @@ public class ImportLecturesJob {
         this.repository = repository;
     }
 
-    public void execute(long scheduleId, List<Lecture> lectures) {
+    public void execute(long scheduleId, Iterable<Lecture> lectures) {
         Iterable<Lecture> entities = IterableUtils.map(lectures, (lecture -> lecture.withScheduleId(scheduleId)));
 
         repository.saveAll(entities);
