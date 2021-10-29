@@ -2,6 +2,7 @@ package com.iscte.mei.ads.schedules.api.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.iscte.mei.ads.schedules.api.entities.Lecture;
+import com.iscte.mei.ads.schedules.api.utils.StringUtils;
 
 import java.time.format.DateTimeFormatter;
 
@@ -91,7 +92,7 @@ public class WriteLecture {
     }
 
     public String getDay() {
-        return day == null || day.isEmpty() || day.isBlank() ? null : supportedFormatter.format(sourceFormatter.parse(day));
+        return StringUtils.nullIfEmpty(day) == null ? null : supportedFormatter.format(sourceFormatter.parse(day));
     }
 
     public String getDayOfTheWeek() {
@@ -99,11 +100,11 @@ public class WriteLecture {
     }
 
     public String getStartTime() {
-        return startTime.isBlank() || startTime.isEmpty() ? null : startTime;
+        return StringUtils.nullIfEmpty(startTime);
     }
 
     public String getEndTime() {
-        return endTime.isBlank() || endTime.isEmpty() ? null : endTime;
+        return StringUtils.nullIfEmpty(endTime);
     }
 
     public int getSignedUpForClass() {

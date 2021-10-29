@@ -4,9 +4,8 @@ import com.iscte.mei.ads.schedules.api.entities.Lecture;
 import com.iscte.mei.ads.schedules.api.entities.Schedule;
 import com.iscte.mei.ads.schedules.api.repositories.LecturesRepository;
 import com.iscte.mei.ads.schedules.api.repositories.SchedulesRepository;
+import com.iscte.mei.ads.schedules.api.utils.IterableUtils;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 
 @Service
 public class SchedulesService {
@@ -32,10 +31,8 @@ public class SchedulesService {
     }
 
     private void saveLectures(long scheduleId, Iterable<Lecture> lectures) {
-        ArrayList<Lecture> entities = new ArrayList<>();
+        Iterable<Lecture> lecturesWithIds = IterableUtils.map(lectures, (lecture -> lecture.withScheduleId(scheduleId)));
 
-        for (Lecture l : lectures) entities.add(l.withScheduleId(scheduleId));
-
-        lecturesRepository.saveAll(entities);
+        lecturesRepository.saveAll(lecturesWithIds);
     }
 }
