@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
 @ControllerAdvice
 public class ExceptionController {
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+    private static final Logger logger = LoggerFactory.getLogger(ExceptionController.class);
 
     @ExceptionHandler(IllegalArgumentException.class)
     @ResponseStatus(
