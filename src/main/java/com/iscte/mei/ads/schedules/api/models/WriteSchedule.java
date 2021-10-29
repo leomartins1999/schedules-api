@@ -13,22 +13,36 @@ public class WriteSchedule {
     @NotBlank
     private String name;
 
-    public WriteSchedule(String name) {
+    @NotNull
+    private ScheduleFormat format;
+
+    @NotNull
+    @NotEmpty
+    @NotBlank
+    private String content;
+
+    public WriteSchedule(String name, ScheduleFormat format, String content) {
         this.name = name;
+        this.format = format;
+        this.content = content;
     }
 
     public WriteSchedule() {
-    }
-
-    public Schedule toSchedule() {
-        return new Schedule(name);
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public ScheduleFormat getFormat() {
+        return format;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public Schedule toSchedule() {
+        return new Schedule(name);
     }
 }

@@ -1,5 +1,6 @@
 package com.iscte.mei.ads.schedules.api.controllers;
 
+import com.iscte.mei.ads.schedules.api.deserializers.LectureListDeserializer;
 import com.iscte.mei.ads.schedules.api.entities.Schedule;
 import com.iscte.mei.ads.schedules.api.services.SchedulesService;
 import org.junit.jupiter.api.DisplayName;
@@ -26,6 +27,9 @@ public class GetSchedulesTests {
 
     @MockBean
     private SchedulesService service;
+
+    @MockBean
+    private LectureListDeserializer deserializer;
 
     @Test
     @DisplayName("Gets no schedules")

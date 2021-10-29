@@ -1,8 +1,15 @@
 package com.iscte.mei.ads.schedules.api.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.iscte.mei.ads.schedules.api.entities.Lecture;
+import com.iscte.mei.ads.schedules.api.utils.StringUtils;
+
+import java.time.format.DateTimeFormatter;
 
 public class WriteLecture {
+
+    private final static DateTimeFormatter sourceFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private final static DateTimeFormatter supportedFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     // Unidade Curricular
     @JsonProperty("Unidade de execu��o")
@@ -46,7 +53,7 @@ public class WriteLecture {
 
     // Lotacao
     @JsonProperty("Lota��o")
-    private int maxNumberOfStudents;
+    private int maxNumberOfStudentsForRoom;
 
     // Caracteristicas da sala pedida para a aula
     @JsonProperty("Caracter�sticas da sala pedida para a aula")
@@ -62,7 +69,7 @@ public class WriteLecture {
 
     // Turnos com inscricoes superiores as caracteristicas da sala
     @JsonProperty("Turno com inscri��es superiores � capacidade das salas")
-    private boolean hasTooManyStudents;
+    private boolean shiftHasTooManyStudentsForRoom;
 
     public String getLecture() {
         return lecture;
@@ -85,7 +92,7 @@ public class WriteLecture {
     }
 
     public String getDay() {
-        return day;
+        return StringUtils.nullIfEmpty(day) == null ? null : supportedFormatter.format(sourceFormatter.parse(day));
     }
 
     public String getDayOfTheWeek() {
@@ -93,19 +100,19 @@ public class WriteLecture {
     }
 
     public String getStartTime() {
-        return startTime;
+        return StringUtils.nullIfEmpty(startTime);
     }
 
     public String getEndTime() {
-        return endTime;
+        return StringUtils.nullIfEmpty(endTime);
     }
 
     public int getSignedUpForClass() {
         return signedUpForClass;
     }
 
-    public int getMaxNumberOfStudents() {
-        return maxNumberOfStudents;
+    public int getMaxNumberOfStudentsForRoom() {
+        return maxNumberOfStudentsForRoom;
     }
 
     public String getLectureRoomRequestedCharacteristics() {
@@ -120,7 +127,26 @@ public class WriteLecture {
         return isRoomOverqualifiedForClass;
     }
 
-    public boolean isHasTooManyStudents() {
-        return hasTooManyStudents;
+    public boolean isShiftHasTooManyStudentsForRoom() {
+        return shiftHasTooManyStudentsForRoom;
+    }
+
+    public Lecture toLecture() {
+        return new Lecture(
+                lecture,
+                course,
+                klass,
+                shift,
+                room,
+                getDay(),
+                getStartTime(),
+                getEndTime(),
+                signedUpForClass,
+                maxNumberOfStudentsForRoom,
+                lectureRoomRequestedCharacteristics,
+                lectureRoomActualCharacteristics,
+                isRoomOverqualifiedForClass,
+                shiftHasTooManyStudentsForRoom
+        );
     }
 }

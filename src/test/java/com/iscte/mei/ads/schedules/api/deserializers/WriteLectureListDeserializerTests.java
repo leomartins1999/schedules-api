@@ -1,7 +1,7 @@
 package com.iscte.mei.ads.schedules.api.deserializers;
 
 import com.iscte.mei.ads.schedules.api.models.WriteLecture;
-import com.iscte.mei.ads.schedules.api.entities.ScheduleFormat;
+import com.iscte.mei.ads.schedules.api.models.ScheduleFormat;
 import com.iscte.mei.ads.schedules.api.utils.IterableUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
