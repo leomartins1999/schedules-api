@@ -1,26 +1,41 @@
 package com.iscte.mei.ads.schedules.api.services;
 
+import com.iscte.mei.ads.schedules.api.entities.Lecture;
 import com.iscte.mei.ads.schedules.api.entities.Schedule;
-import com.iscte.mei.ads.schedules.api.models.WriteSchedule;
+import com.iscte.mei.ads.schedules.api.repositories.LecturesRepository;
 import com.iscte.mei.ads.schedules.api.repositories.SchedulesRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 
 @Service
 public class SchedulesService {
 
-    private final SchedulesRepository repository;
+    private final SchedulesRepository schedulesRepository;
+    private final LecturesRepository lecturesRepository;
 
-    public SchedulesService(SchedulesRepository repository) {
-        this.repository = repository;
+    public SchedulesService(SchedulesRepository schedulesRepository, LecturesRepository lecturesRepository) {
+        this.schedulesRepository = schedulesRepository;
+        this.lecturesRepository = lecturesRepository;
     }
 
-    public Schedule createSchedule(WriteSchedule model) {
-        Schedule schedule = model.toSchedule();
+    public Schedule createSchedule(Schedule schedule, Iterable<Lecture> lectures) {
+        Schedule s = schedulesRepository.save(schedule);
 
-        return repository.save(schedule);
+        saveLectures(s.getId(), lectures);
+
+        return s;
     }
 
     public Iterable<Schedule> getSchedules() {
-        return repository.findAll();
+        return schedulesRepository.findAll();
+    }
+
+    private void saveLectures(long scheduleId, Iterable<Lecture> lectures) {
+        ArrayList<Lecture> entities = new ArrayList<>();
+
+        for (Lecture l : lectures) entities.add(l.withScheduleId(scheduleId));
+
+        lecturesRepository.saveAll(entities);
     }
 }

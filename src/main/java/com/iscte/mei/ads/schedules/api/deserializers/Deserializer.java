@@ -10,9 +10,13 @@ abstract public class Deserializer<T> {
     abstract T deserialize(String content) throws IOException;
 
     String decodeFromBase64(String content) {
-        byte[] data = decoder.decode(content);
+        try {
+            byte[] data = decoder.decode(content);
 
-        return new String(data);
+            return new String(data);
+        } catch (Exception ex) {
+            throw new IllegalArgumentException();
+        }
     }
 
 }

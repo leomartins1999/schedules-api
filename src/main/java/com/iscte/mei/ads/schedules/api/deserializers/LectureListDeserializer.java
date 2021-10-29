@@ -1,7 +1,7 @@
 package com.iscte.mei.ads.schedules.api.deserializers;
 
 import com.iscte.mei.ads.schedules.api.models.WriteLecture;
-import com.iscte.mei.ads.schedules.api.entities.ScheduleFormat;
+import com.iscte.mei.ads.schedules.api.models.ScheduleFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
