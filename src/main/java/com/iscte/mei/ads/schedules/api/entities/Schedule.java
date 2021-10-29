@@ -9,10 +9,12 @@ public class Schedule {
     @Id
     private long id;
     private String name;
+    private ScheduleStatus status;
 
     public Schedule(String name) {
         this.id = 0;
         this.name = name;
+        this.status = ScheduleStatus.CREATED;
     }
 
     public long getId() {
@@ -21,6 +23,14 @@ public class Schedule {
 
     public String getName() {
         return name;
+    }
+
+    public ScheduleStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ScheduleStatus status) {
+        this.status = status;
     }
 
     @Override

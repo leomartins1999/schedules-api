@@ -18,7 +18,7 @@ services:
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/schedules-db
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/schedules-db?stringtype=unspecified
       SPRING_DATASOURCE_USERNAME: admin
       SPRING_DATASOURCE_PASSWORD: admin
     command: gradle bootRun
