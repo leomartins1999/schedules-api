@@ -27,7 +27,7 @@ public class ImportScheduleExecutor {
         this.importJob = importJob;
         this.repository = repository;
 
-        this.pool = Executors.newFixedThreadPool(properties.maxParallel);
+        this.pool = Executors.newFixedThreadPool(properties.getMaxParallel());
     }
 
     public void scheduleImport(Schedule schedule, Iterable<Lecture> lectures) {

@@ -7,6 +7,13 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties("schedules")
 public class ImportScheduleProperties {
 
-    public int maxParallel = 3;
+    private int maxParallel = 3;
 
+    public int getMaxParallel() {
+        return maxParallel;
+    }
+
+    public void setMaxParallel(int maxParallel) {
+        this.maxParallel = maxParallel;
+    }
 }
