@@ -11,6 +11,7 @@ This project is the assignment of the ADS lecture of ISCTE's MEI (project 4).
 |SPRING_DATASOURCE_USERNAME|Database User's Username||
 |SPRING_DATASOURCE_PASSWORD|Database User's Password||
 |SCHEDULES_MAX_PARALLEL|Maximum number of schedules being imported simultaneously|3|
+|CORS_ALLOWED_ORIGIN|URL of frontend application|<empty>|
 
 ## Run application
 
