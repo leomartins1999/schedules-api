@@ -1,0 +1,2 @@
+CREATE INDEX IF NOT EXISTS
+    schedule_id_idx ON lecture(schedule_id);

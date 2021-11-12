@@ -6,6 +6,8 @@ import com.iscte.mei.ads.schedules.api.executors.ImportScheduleExecutor;
 import com.iscte.mei.ads.schedules.api.repositories.SchedulesRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
+
 @Service
 public class SchedulesService {
 
@@ -31,5 +33,11 @@ public class SchedulesService {
 
     public Schedule getScheduleById(long scheduleId) {
         return schedulesRepository.findById(scheduleId).get();
+    }
+
+    public Iterable<String> getDatesForSchedule(long scheduleId) {
+        if (schedulesRepository.findById(scheduleId).isEmpty()) throw new NoSuchElementException();
+
+        return schedulesRepository.getDatesForSchedule(scheduleId);
     }
 }
