@@ -60,8 +60,8 @@ public class SchedulesController {
     }
 
     @GetMapping(Paths.DATES_FOR_SCHEDULE_MAPPING)
-    public Schedule getDatesForSchedule(@PathVariable String id) {
-        throw new IllegalStateException();
+    public Iterable<String> getDatesForSchedule(@PathVariable long id) {
+        return service.getDatesForSchedule(id);
     }
 
     @GetMapping(Paths.LECTURES_FOR_SCHEDULE_MAPPING)
