@@ -2,7 +2,7 @@ package com.iscte.mei.ads.schedules.api.services;
 
 import com.iscte.mei.ads.schedules.api.entities.Lecture;
 import com.iscte.mei.ads.schedules.api.entities.Schedule;
-import com.iscte.mei.ads.schedules.api.executors.ImportScheduleExecutor;
+import com.iscte.mei.ads.schedules.api.executors.ScheduleJobsExecutor;
 import com.iscte.mei.ads.schedules.api.repositories.SchedulesRepository;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +12,9 @@ import java.util.NoSuchElementException;
 public class SchedulesService {
 
     private final SchedulesRepository schedulesRepository;
-    private final ImportScheduleExecutor executor;
+    private final ScheduleJobsExecutor executor;
 
-    public SchedulesService(SchedulesRepository schedulesRepository, ImportScheduleExecutor executor) {
+    public SchedulesService(SchedulesRepository schedulesRepository, ScheduleJobsExecutor executor) {
         this.schedulesRepository = schedulesRepository;
         this.executor = executor;
     }

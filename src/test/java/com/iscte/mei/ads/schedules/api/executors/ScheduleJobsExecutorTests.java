@@ -18,10 +18,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doThrow;
 
 @SpringBootTest
-public class ImportScheduleExecutorTests {
+public class ScheduleJobsExecutorTests {
 
     @Autowired
-    private ImportScheduleExecutor executor;
+    private ScheduleJobsExecutor executor;
 
     @Autowired
     private SchedulesRepository repository;
