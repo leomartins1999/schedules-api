@@ -1,7 +1,7 @@
 package com.iscte.mei.ads.schedules.api.jobs;
 
 import com.iscte.mei.ads.schedules.api.entities.Lecture;
-import com.iscte.mei.ads.schedules.api.repositories.LecturesRepository;
+import com.iscte.mei.ads.schedules.api.repositories.LectureRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,10 +20,10 @@ public class ImportLecturesJobTests {
 
     private final ImportLecturesJob job;
 
-    private final LecturesRepository repository;
+    private final LectureRepository repository;
 
     @Autowired
-    public ImportLecturesJobTests(ImportLecturesJob job, LecturesRepository repository) {
+    public ImportLecturesJobTests(ImportLecturesJob job, LectureRepository repository) {
         this.job = job;
         this.repository = repository;
     }

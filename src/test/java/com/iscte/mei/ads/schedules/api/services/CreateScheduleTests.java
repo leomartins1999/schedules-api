@@ -1,8 +1,8 @@
 package com.iscte.mei.ads.schedules.api.services;
 
 import com.iscte.mei.ads.schedules.api.entities.Schedule;
-import com.iscte.mei.ads.schedules.api.repositories.LecturesRepository;
-import com.iscte.mei.ads.schedules.api.repositories.SchedulesRepository;
+import com.iscte.mei.ads.schedules.api.repositories.LectureRepository;
+import com.iscte.mei.ads.schedules.api.repositories.ScheduleRepository;
 import com.iscte.mei.ads.schedules.api.utils.IterableUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -20,20 +20,20 @@ public class CreateScheduleTests {
 
     private final SchedulesService service;
 
-    private final SchedulesRepository schedulesRepository;
-    private final LecturesRepository lecturesRepository;
+    private final ScheduleRepository scheduleRepository;
+    private final LectureRepository lectureRepository;
 
     @Autowired
-    public CreateScheduleTests(SchedulesService service, SchedulesRepository schedulesRepository, LecturesRepository lecturesRepository) {
+    public CreateScheduleTests(SchedulesService service, ScheduleRepository scheduleRepository, LectureRepository lectureRepository) {
         this.service = service;
-        this.schedulesRepository = schedulesRepository;
-        this.lecturesRepository = lecturesRepository;
+        this.scheduleRepository = scheduleRepository;
+        this.lectureRepository = lectureRepository;
     }
 
     @BeforeEach
     public void setup() {
-        schedulesRepository.deleteAll();
-        lecturesRepository.deleteAll();
+        scheduleRepository.deleteAll();
+        lectureRepository.deleteAll();
     }
 
     @Test
@@ -45,7 +45,7 @@ public class CreateScheduleTests {
 
         assertEquals("schedule-name", result.getName());
 
-        List<Schedule> schedules = IterableUtils.iterableToList(schedulesRepository.findAll());
+        List<Schedule> schedules = IterableUtils.iterableToList(scheduleRepository.findAll());
         assertEquals(1, schedules.size());
         assertEquals("schedule-name", schedules.get(0).getName());
     }
@@ -63,7 +63,7 @@ public class CreateScheduleTests {
         assertEquals("schedule-name", second.getName());
         assert (!first.equals(second));
 
-        List<Schedule> schedules = IterableUtils.iterableToList(schedulesRepository.findAll());
+        List<Schedule> schedules = IterableUtils.iterableToList(scheduleRepository.findAll());
         assertEquals(2, schedules.size());
     }
 }
