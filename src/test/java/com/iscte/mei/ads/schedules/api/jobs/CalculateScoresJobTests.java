@@ -2,7 +2,7 @@ package com.iscte.mei.ads.schedules.api.jobs;
 
 import com.iscte.mei.ads.schedules.api.entities.Lecture;
 import com.iscte.mei.ads.schedules.api.entities.Score;
-import com.iscte.mei.ads.schedules.api.repositories.LecturesRepository;
+import com.iscte.mei.ads.schedules.api.repositories.LectureRepository;
 import com.iscte.mei.ads.schedules.api.repositories.ScoreRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -25,12 +25,12 @@ public class CalculateScoresJobTests {
     private ScoreRepository scoreRepository;
 
     @Autowired
-    private LecturesRepository lecturesRepository;
+    private LectureRepository lectureRepository;
 
     @BeforeEach
     void setUp() {
         scoreRepository.deleteAll();
-        lecturesRepository.deleteAll();
+        lectureRepository.deleteAll();
     }
 
     @Nested
@@ -111,7 +111,7 @@ public class CalculateScoresJobTests {
                 false
         ).withScheduleId(CalculateScoresJobTests.SCHEDULE_ID);
 
-        lecturesRepository.save(l);
+        lectureRepository.save(l);
     }
 
 }

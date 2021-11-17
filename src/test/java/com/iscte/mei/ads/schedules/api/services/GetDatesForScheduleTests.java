@@ -2,8 +2,8 @@ package com.iscte.mei.ads.schedules.api.services;
 
 import com.iscte.mei.ads.schedules.api.entities.Lecture;
 import com.iscte.mei.ads.schedules.api.entities.Schedule;
-import com.iscte.mei.ads.schedules.api.repositories.LecturesRepository;
-import com.iscte.mei.ads.schedules.api.repositories.SchedulesRepository;
+import com.iscte.mei.ads.schedules.api.repositories.LectureRepository;
+import com.iscte.mei.ads.schedules.api.repositories.ScheduleRepository;
 import com.iscte.mei.ads.schedules.api.utils.IterableUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -22,10 +22,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class GetDatesForScheduleTests {
 
     @Autowired
-    private SchedulesRepository schedulesRepository;
+    private ScheduleRepository scheduleRepository;
 
     @Autowired
-    private LecturesRepository lecturesRepository;
+    private LectureRepository lectureRepository;
 
     @Autowired
     private SchedulesService service;
@@ -34,17 +34,17 @@ public class GetDatesForScheduleTests {
 
     @BeforeEach
     public void setup() {
-        lecturesRepository.deleteAll();
-        schedulesRepository.deleteAll();
+        lectureRepository.deleteAll();
+        scheduleRepository.deleteAll();
 
-        Schedule s = schedulesRepository.save(new Schedule("test-schedule"));
+        Schedule s = scheduleRepository.save(new Schedule("test-schedule"));
         scheduleId = s.getId();
     }
 
     @Test
     @DisplayName("Gets date for schedule")
     void datesForScheduleTest() {
-        Lecture l = lecturesRepository.save(buildTestLecture(scheduleId, "2021-03-03"));
+        Lecture l = lectureRepository.save(buildTestLecture(scheduleId, "2021-03-03"));
 
         Iterable<String> dates = service.getDatesForSchedule(scheduleId);
         List<String> dateList = IterableUtils.iterableToList(dates);
@@ -59,8 +59,8 @@ public class GetDatesForScheduleTests {
         String day = "2021-03-03";
         Lecture l = buildTestLecture(scheduleId, day);
 
-        lecturesRepository.save(l);
-        lecturesRepository.save(l);
+        lectureRepository.save(l);
+        lectureRepository.save(l);
 
         Iterable<String> dates = service.getDatesForSchedule(scheduleId);
         List<String> dateList = IterableUtils.iterableToList(dates);
@@ -76,9 +76,9 @@ public class GetDatesForScheduleTests {
         String fourthOfMarch = "2021-03-04";
         String thirdOfMay = "2021-05-03";
 
-        lecturesRepository.save(buildTestLecture(scheduleId, thirdOfMay));
-        lecturesRepository.save(buildTestLecture(scheduleId, thirdOfMarch));
-        lecturesRepository.save(buildTestLecture(scheduleId, fourthOfMarch));
+        lectureRepository.save(buildTestLecture(scheduleId, thirdOfMay));
+        lectureRepository.save(buildTestLecture(scheduleId, thirdOfMarch));
+        lectureRepository.save(buildTestLecture(scheduleId, fourthOfMarch));
 
         Iterable<String> dates = service.getDatesForSchedule(scheduleId);
         List<String> dateList = IterableUtils.iterableToList(dates);

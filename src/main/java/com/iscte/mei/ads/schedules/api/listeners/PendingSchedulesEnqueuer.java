@@ -2,7 +2,7 @@ package com.iscte.mei.ads.schedules.api.listeners;
 
 import com.iscte.mei.ads.schedules.api.entities.Schedule;
 import com.iscte.mei.ads.schedules.api.executors.ScheduleJobsExecutor;
-import com.iscte.mei.ads.schedules.api.repositories.SchedulesRepository;
+import com.iscte.mei.ads.schedules.api.repositories.ScheduleRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -30,9 +30,9 @@ public class PendingSchedulesEnqueuer implements ApplicationListener<Application
 
     private final ScheduleJobsExecutor executor;
 
-    private final SchedulesRepository repository;
+    private final ScheduleRepository repository;
 
-    public PendingSchedulesEnqueuer(ScheduleJobsExecutor executor, SchedulesRepository repository) {
+    public PendingSchedulesEnqueuer(ScheduleJobsExecutor executor, ScheduleRepository repository) {
         this.executor = executor;
         this.repository = repository;
     }

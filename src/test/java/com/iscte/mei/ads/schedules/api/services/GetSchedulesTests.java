@@ -1,7 +1,7 @@
 package com.iscte.mei.ads.schedules.api.services;
 
 import com.iscte.mei.ads.schedules.api.entities.Schedule;
-import com.iscte.mei.ads.schedules.api.repositories.SchedulesRepository;
+import com.iscte.mei.ads.schedules.api.repositories.ScheduleRepository;
 import com.iscte.mei.ads.schedules.api.utils.IterableUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -16,11 +16,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 public class GetSchedulesTests {
 
-    private final SchedulesRepository repository;
+    private final ScheduleRepository repository;
     private final SchedulesService service;
 
     @Autowired
-    public GetSchedulesTests(SchedulesRepository repository, SchedulesService service) {
+    public GetSchedulesTests(ScheduleRepository repository, SchedulesService service) {
         this.repository = repository;
         this.service = service;
     }

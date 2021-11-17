@@ -6,7 +6,7 @@ import com.iscte.mei.ads.schedules.api.entities.ScheduleStatus;
 import com.iscte.mei.ads.schedules.api.jobs.CalculateScoresJob;
 import com.iscte.mei.ads.schedules.api.jobs.ImportLecturesJob;
 import com.iscte.mei.ads.schedules.api.properties.ImportScheduleProperties;
-import com.iscte.mei.ads.schedules.api.repositories.SchedulesRepository;
+import com.iscte.mei.ads.schedules.api.repositories.ScheduleRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -23,11 +23,11 @@ public class ScheduleJobsExecutor {
     private final ImportLecturesJob importJob;
     private final CalculateScoresJob calculateJob;
 
-    private final SchedulesRepository repository;
+    private final ScheduleRepository repository;
 
     private final ExecutorService pool;
 
-    public ScheduleJobsExecutor(ImportLecturesJob importJob, CalculateScoresJob calculateJob, SchedulesRepository repository, ImportScheduleProperties properties) {
+    public ScheduleJobsExecutor(ImportLecturesJob importJob, CalculateScoresJob calculateJob, ScheduleRepository repository, ImportScheduleProperties properties) {
         this.importJob = importJob;
         this.calculateJob = calculateJob;
 
