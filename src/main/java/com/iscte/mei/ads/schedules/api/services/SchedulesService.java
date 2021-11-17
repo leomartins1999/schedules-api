@@ -7,7 +7,10 @@ import com.iscte.mei.ads.schedules.api.repositories.LectureRepository;
 import com.iscte.mei.ads.schedules.api.repositories.ScheduleRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
 public class SchedulesService {
@@ -42,5 +45,25 @@ public class SchedulesService {
         if (scheduleRepository.findById(scheduleId).isEmpty()) throw new NoSuchElementException();
 
         return lectureRepository.getDatesForSchedule(scheduleId);
+    }
+
+    public Iterable<String> getClassesForSchedule(long scheduleId) {
+        if (scheduleRepository.findById(scheduleId).isEmpty()) throw new NoSuchElementException();
+
+        List<String> classes = lectureRepository.getClassesForSchedule(scheduleId);
+        return decomposeClasses(classes);
+    }
+
+    /**
+     * Some classes are composed ie: 'ABC, DEF'
+     * This method decomposes these classes
+     */
+    private List<String> decomposeClasses(List<String> classes) {
+        return classes.stream()
+                .map(klass -> klass.split(","))
+                .flatMap(Arrays::stream)
+                .distinct()
+                .map(String::trim)
+                .collect(Collectors.toList());
     }
 }
