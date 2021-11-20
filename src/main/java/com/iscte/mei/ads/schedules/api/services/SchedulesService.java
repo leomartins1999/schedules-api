@@ -54,6 +54,17 @@ public class SchedulesService {
         return decomposeClasses(classes);
     }
 
+    public List<Lecture> getLecturesForSchedule(long scheduleId, String klass, String startDate, String endDate) {
+        if (scheduleRepository.findById(scheduleId).isEmpty()) throw new NoSuchElementException();
+
+        return lectureRepository.getLecturesForSchedule(
+                scheduleId,
+                klass,
+                startDate,
+                endDate
+        );
+    }
+
     /**
      * Some classes are composed ie: 'ABC, DEF'
      * This method decomposes these classes
