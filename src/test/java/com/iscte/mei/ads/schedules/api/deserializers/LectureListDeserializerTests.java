@@ -16,14 +16,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
-public class WriteLectureListDeserializerTests {
+@DisplayName("Lecture List Deserializer tests")
+public class LectureListDeserializerTests {
 
     private static final Base64.Encoder encoder = Base64.getEncoder();
 
     private final LectureListDeserializer deserializer;
 
     @Autowired
-    public WriteLectureListDeserializerTests(LectureListDeserializer deserializer) {
+    public LectureListDeserializerTests(LectureListDeserializer deserializer) {
         this.deserializer = deserializer;
     }
 

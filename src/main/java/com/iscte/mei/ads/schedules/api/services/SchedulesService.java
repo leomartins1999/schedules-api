@@ -2,14 +2,18 @@ package com.iscte.mei.ads.schedules.api.services;
 
 import com.iscte.mei.ads.schedules.api.entities.Lecture;
 import com.iscte.mei.ads.schedules.api.entities.Schedule;
+import com.iscte.mei.ads.schedules.api.entities.ScheduleStatus;
+import com.iscte.mei.ads.schedules.api.entities.Score;
 import com.iscte.mei.ads.schedules.api.executors.ScheduleJobsExecutor;
 import com.iscte.mei.ads.schedules.api.repositories.LectureRepository;
 import com.iscte.mei.ads.schedules.api.repositories.ScheduleRepository;
+import com.iscte.mei.ads.schedules.api.repositories.ScoreRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -17,11 +21,18 @@ public class SchedulesService {
 
     private final ScheduleRepository scheduleRepository;
     private final LectureRepository lectureRepository;
+    private final ScoreRepository scoreRepository;
     private final ScheduleJobsExecutor executor;
 
-    public SchedulesService(ScheduleRepository scheduleRepository, LectureRepository lectureRepository, ScheduleJobsExecutor executor) {
+    public SchedulesService(
+            ScheduleRepository scheduleRepository,
+            LectureRepository lectureRepository,
+            ScoreRepository scoreRepository,
+            ScheduleJobsExecutor executor
+    ) {
         this.scheduleRepository = scheduleRepository;
         this.lectureRepository = lectureRepository;
+        this.scoreRepository = scoreRepository;
         this.executor = executor;
     }
 
@@ -63,6 +74,16 @@ public class SchedulesService {
                 startDate,
                 endDate
         );
+    }
+
+    public Score getScoresForSchedule(long scheduleId) {
+        Optional<Schedule> optional = scheduleRepository.findById(scheduleId);
+        if (optional.isEmpty()) throw new NoSuchElementException();
+
+        Schedule s = optional.get();
+        if (s.getStatus() != ScheduleStatus.DONE) throw new IllegalStateException();
+
+        return scoreRepository.getByScheduleId(scheduleId);
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.iscte.mei.ads.schedules.api.controllers;
 
 import com.iscte.mei.ads.schedules.api.deserializers.LectureListDeserializer;
+import com.iscte.mei.ads.schedules.api.entities.Score;
 import com.iscte.mei.ads.schedules.api.services.SchedulesService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,8 +10,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.NoSuchElementException;
 
 import static org.mockito.Mockito.when;
@@ -19,10 +18,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(SchedulesController.class)
-@DisplayName("Get Dates for Schedule Endpoint tests")
-public class GetDatesForScheduleTests {
+@DisplayName("Get Scores for Schedule Endpoint tests")
+public class GetScoresForScheduleTests {
 
-    private static final String ENDPOINT_URL = "/schedules/1/dates";
+    private static final String ENDPOINT_URL = "/schedules/1/scores";
 
     @Autowired
     private MockMvc mockMvc;
@@ -34,37 +33,34 @@ public class GetDatesForScheduleTests {
     private LectureListDeserializer deserializer;
 
     @Test
-    @DisplayName("Gets no dates")
-    void getNoDatesTest() throws Exception {
-        Iterable<String> dates = Collections.emptyList();
+    @DisplayName("Gets the scores for a schedule")
+    void getScore() throws Exception {
+        Score score = new Score(1, 0.5F);
 
-        when(service.getDatesForSchedule(1)).thenReturn(dates);
-
-        mockMvc.perform(get(ENDPOINT_URL))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.length()").value(0));
-    }
-
-    @Test
-    @DisplayName("Gets multiple dates")
-    void getDatesTest() throws Exception {
-        Iterable<String> dates = List.of(new String[]{"2021-03-03", "2021-03-04"});
-
-        when(service.getDatesForSchedule(1)).thenReturn(dates);
+        when(service.getScoresForSchedule(score.getScheduleId())).thenReturn(score);
 
         mockMvc.perform(get(ENDPOINT_URL))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.length()").value(2))
-                .andExpect(jsonPath("$[0]").value("2021-03-03"));
+                .andExpect(jsonPath("$.schedule_id").value(score.getScheduleId()))
+                .andExpect(jsonPath("$.pct_overflowing_lectures").value(0.5));
     }
 
     @Test
-    @DisplayName("Responds with 404 if the schedule is not found")
-    void noScheduleTest() throws Exception {
-        when(service.getDatesForSchedule(1)).thenThrow(NoSuchElementException.class);
+    @DisplayName("If the schedule does not exist, responds with 404")
+    void scheduleNotFound() throws Exception {
+        when(service.getScoresForSchedule(1)).thenThrow(NoSuchElementException.class);
 
         mockMvc.perform(get(ENDPOINT_URL))
                 .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @DisplayName("If the schedule has not finished calculating, responds with 409")
+    void scheduleNotFinishedCalculating() throws Exception {
+        when(service.getScoresForSchedule(1)).thenThrow(IllegalStateException.class);
+
+        mockMvc.perform(get(ENDPOINT_URL))
+                .andExpect(status().isConflict());
     }
 
 }

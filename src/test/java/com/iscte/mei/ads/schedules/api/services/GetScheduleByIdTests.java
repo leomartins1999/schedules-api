@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
+@DisplayName("Get Schedule by Id Service tests")
 public class GetScheduleByIdTests {
 
     private final ScheduleRepository repository;

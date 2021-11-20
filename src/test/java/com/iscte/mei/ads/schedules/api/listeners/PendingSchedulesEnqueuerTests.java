@@ -16,6 +16,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 @SpringBootTest
+@DisplayName("Pending Schedules Enqueuer tests")
 public class PendingSchedulesEnqueuerTests {
 
     @Autowired

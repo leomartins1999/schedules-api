@@ -16,6 +16,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
+@DisplayName("Create Schedule Service tests")
 public class CreateScheduleTests {
 
     private final SchedulesService service;
