@@ -43,7 +43,7 @@ public class GetScoresForScheduleTests {
 
         scheduleRepository.save(s);
 
-        Score score = scoreRepository.save(new Score(s.getId(), 0.5F, 1));
+        Score score = scoreRepository.save(new Score(s.getId(), 0.5F, 1, 1));
 
         Score result = service.getScoresForSchedule(s.getId());
 
