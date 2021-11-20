@@ -30,4 +30,7 @@ public interface LectureRepository extends CrudRepository<Lecture, Long> {
             + "ORDER BY day ASC, start_time ASC;"
     )
     List<Lecture> getLecturesForSchedule(long scheduleId, String klass, String startDate, String endDate);
+
+    @Query("SELECT COUNT(DISTINCT room) FROM lecture WHERE schedule_id = :scheduleId;")
+    long getNrUsedRooms(long scheduleId);
 }
