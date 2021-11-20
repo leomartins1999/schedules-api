@@ -35,7 +35,7 @@ public class GetScoresForScheduleTests {
     @Test
     @DisplayName("Gets the scores for a schedule")
     void getScore() throws Exception {
-        Score score = new Score(1, 0.5F, 1);
+        Score score = new Score(1, 0.5F, 1, 1);
 
         when(service.getScoresForSchedule(score.getScheduleId())).thenReturn(score);
 

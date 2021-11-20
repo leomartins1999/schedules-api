@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @SpringBootTest
 @DisplayName("Calculate Scores Job tests")
-public class CalculateScoresJobTest {
+public class CalculateScoresJobTests {
 
     @Autowired
     private CalculateScoresJob job;
@@ -37,7 +37,7 @@ public class CalculateScoresJobTest {
     @Test
     @DisplayName("Upserts the existing score for the given schedule")
     void updateScore() {
-        Score s = new Score(1, 0.5F, 10);
+        Score s = new Score(1, 0.5F, 10, 1);
         scoreRepository.save(s);
 
         job.execute(1);

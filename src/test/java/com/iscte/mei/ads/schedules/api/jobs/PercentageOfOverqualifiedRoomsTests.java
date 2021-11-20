@@ -13,8 +13,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-@DisplayName("Number of Used Rooms tests")
-public class NumberOfUsedRoomsTest {
+@DisplayName("Percentage of Overqualified Rooms for Lectures tests")
+public class PercentageOfOverqualifiedRoomsTests {
 
     private static final long SCHEDULE_ID = 1L;
 
@@ -34,44 +34,42 @@ public class NumberOfUsedRoomsTest {
     }
 
     @Test
-    @DisplayName("One room is used")
-    void singleRoomUsed() {
-        saveTestLecture("room-1");
-        saveTestLecture("room-1");
-        saveTestLecture("room-1");
-
+    @DisplayName("If no rooms are overqualified, the percentage is 0")
+    void noRoomsOverqualified() {
         job.execute(SCHEDULE_ID);
 
         Score s = getScore();
 
         assertEquals(SCHEDULE_ID, s.getScheduleId());
-        assertEquals(1, s.getNrUsedRooms());
+        assertEquals(0, s.getPctOverqualifiedRoomsForLectures());
     }
 
     @Test
-    @DisplayName("Multiple rooms are used")
-    void multipleRoomsUsed() {
-        saveTestLecture("room-1");
-        saveTestLecture("room-2");
-        saveTestLecture("room-2");
+    @DisplayName("If half the rooms are overqualified, the percentage is 50")
+    void halfRoomsOverqualified() {
+        saveTestLecture(false);
+        saveTestLecture(true);
 
         job.execute(SCHEDULE_ID);
 
         Score s = getScore();
 
         assertEquals(SCHEDULE_ID, s.getScheduleId());
-        assertEquals(2, s.getNrUsedRooms());
+        assertEquals(0.5, s.getPctOverqualifiedRoomsForLectures());
     }
 
     @Test
-    @DisplayName("If there are no lectures, no rooms are used")
-    void noRoomsUsed() {
+    @DisplayName("If all the rooms are overqualified, the percentage is 100")
+    void allRoomsOverqualified() {
+        saveTestLecture(true);
+        saveTestLecture(true);
+
         job.execute(SCHEDULE_ID);
 
         Score s = getScore();
 
         assertEquals(SCHEDULE_ID, s.getScheduleId());
-        assertEquals(0, s.getNrUsedRooms());
+        assertEquals(1, s.getPctOverqualifiedRoomsForLectures());
     }
 
     private Score getScore() {
@@ -81,21 +79,21 @@ public class NumberOfUsedRoomsTest {
                 .next();
     }
 
-    private void saveTestLecture(String room) {
+    private void saveTestLecture(boolean isOverqualified) {
         Lecture l = new Lecture(
                 "",
                 "",
                 "",
                 "",
-                room,
+                "",
                 "2021-03-03",
                 "11:00:00",
                 "12:30:00",
-                0,
-                0,
+                10,
+                20,
                 "",
                 "",
-                false,
+                isOverqualified,
                 false
         ).withScheduleId(SCHEDULE_ID);
 
