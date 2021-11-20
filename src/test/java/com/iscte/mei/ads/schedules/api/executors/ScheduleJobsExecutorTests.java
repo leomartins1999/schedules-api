@@ -23,6 +23,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 @SpringBootTest
+@DisplayName("Schedule Jobs Executor tests")
 public class ScheduleJobsExecutorTests {
 
     @Autowired

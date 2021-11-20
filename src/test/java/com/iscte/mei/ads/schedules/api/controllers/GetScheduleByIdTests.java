@@ -18,6 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(SchedulesController.class)
+@DisplayName("Get Schedule by Id Endpoint tests")
 public class GetScheduleByIdTests {
 
     @Autowired

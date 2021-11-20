@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
+@DisplayName("Get Classes for Schedule Service tests")
 public class GetClassesForScheduleTests {
 
     @Autowired

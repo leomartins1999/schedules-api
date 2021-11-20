@@ -14,6 +14,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
+@DisplayName("Import Lectures for Schedule tests")
 public class ImportLecturesJobTests {
 
     private final static long SCHEDULE_ID = 1L;

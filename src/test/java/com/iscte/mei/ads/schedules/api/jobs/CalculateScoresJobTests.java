@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
+@DisplayName("Calculate Scores For Schedule Job tests")
 public class CalculateScoresJobTests {
 
     private static final long SCHEDULE_ID = 1L;

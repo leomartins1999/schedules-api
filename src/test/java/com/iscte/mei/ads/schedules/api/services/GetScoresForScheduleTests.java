@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
+@DisplayName("Get Scores for Schedule Service tests")
 public class GetScoresForScheduleTests {
 
     @Autowired

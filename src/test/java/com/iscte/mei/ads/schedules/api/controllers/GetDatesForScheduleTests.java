@@ -19,6 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(SchedulesController.class)
+@DisplayName("Get Dates for Schedule Endpoint tests")
 public class GetDatesForScheduleTests {
 
     private static final String ENDPOINT_URL = "/schedules/1/dates";
