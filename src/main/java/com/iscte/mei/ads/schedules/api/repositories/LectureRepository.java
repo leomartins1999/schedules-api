@@ -18,6 +18,16 @@ public interface LectureRepository extends CrudRepository<Lecture, Long> {
     @Query("SELECT DISTINCT day FROM lecture WHERE schedule_id = :scheduleId ORDER BY day ASC;")
     List<String> getDatesForSchedule(long scheduleId);
 
-    @Query("SELECT DISTINCT klass FROM lecture WHERE schedule_id = :scheduleId ORDER BY klass ASC")
+    @Query("SELECT DISTINCT klass FROM lecture WHERE schedule_id = :scheduleId ORDER BY klass ASC;")
     List<String> getClassesForSchedule(long scheduleId);
+
+    @Query("SELECT * "
+            + "FROM lecture "
+            + "WHERE schedule_id = :scheduleId "
+            + "AND klass ~ :klass "
+            + "AND day >= :startDate "
+            + "AND day <= :endDate "
+            + "ORDER BY day ASC, start_time ASC;"
+    )
+    List<Lecture> getLecturesForSchedule(long scheduleId, String klass, String startDate, String endDate);
 }

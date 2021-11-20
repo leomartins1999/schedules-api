@@ -2,6 +2,8 @@ package com.iscte.mei.ads.schedules.api.entities;
 
 import org.springframework.data.annotation.Id;
 
+import java.util.Objects;
+
 public class Lecture {
 
     @Id
@@ -114,4 +116,16 @@ public class Lecture {
         return this;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lecture lecture1 = (Lecture) o;
+        return scheduleId == lecture1.scheduleId && signedUpForClass == lecture1.signedUpForClass && maxNumberOfStudentsForRoom == lecture1.maxNumberOfStudentsForRoom && isRoomOverqualifiedForClass == lecture1.isRoomOverqualifiedForClass && shiftHasTooManyStudentsForRoom == lecture1.shiftHasTooManyStudentsForRoom && Objects.equals(lecture, lecture1.lecture) && Objects.equals(course, lecture1.course) && Objects.equals(klass, lecture1.klass) && Objects.equals(shift, lecture1.shift) && Objects.equals(room, lecture1.room) && Objects.equals(day, lecture1.day) && Objects.equals(startTime, lecture1.startTime) && Objects.equals(endTime, lecture1.endTime) && Objects.equals(lectureRoomRequestedCharacteristics, lecture1.lectureRoomRequestedCharacteristics) && Objects.equals(lectureRoomActualCharacteristics, lecture1.lectureRoomActualCharacteristics);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(scheduleId, lecture, course, klass, shift, room, day, startTime, endTime, signedUpForClass, maxNumberOfStudentsForRoom, lectureRoomRequestedCharacteristics, lectureRoomActualCharacteristics, isRoomOverqualifiedForClass, shiftHasTooManyStudentsForRoom);
+    }
 }

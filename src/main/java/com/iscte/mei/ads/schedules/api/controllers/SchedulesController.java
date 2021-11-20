@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping(Paths.SCHEDULES_MAPPING)
@@ -65,13 +67,25 @@ public class SchedulesController {
     }
 
     @GetMapping(Paths.LECTURES_FOR_SCHEDULE_MAPPING)
-    public Schedule getLecturesForSchedule(@PathVariable String id) {
-        throw new IllegalStateException();
+    public List<Lecture> getLecturesForSchedule(
+            @PathVariable long id,
+            @RequestParam String klass,
+            @RequestParam(name = "start_date") String startDate,
+            @RequestParam(name = "end_date") String endDate
+    ) {
+        if (isQueryParameterInvalid(klass) || isQueryParameterInvalid(startDate) || isQueryParameterInvalid(endDate))
+            throw new IllegalArgumentException();
+
+        return service.getLecturesForSchedule(id, klass, startDate, endDate);
     }
 
     @GetMapping(Paths.SCORES_FOR_SCHEDULE_MAPPING)
     public Schedule getScoresForSchedule(@PathVariable String id) {
         throw new IllegalStateException();
+    }
+
+    private boolean isQueryParameterInvalid(String value) {
+        return value == null || value.isEmpty() || value.isBlank();
     }
 
 }
