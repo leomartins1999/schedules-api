@@ -33,4 +33,13 @@ public interface LectureRepository extends CrudRepository<Lecture, Long> {
 
     @Query("SELECT COUNT(DISTINCT room) FROM lecture WHERE schedule_id = :scheduleId;")
     long getNrUsedRooms(long scheduleId);
+
+    @Query(
+            "SELECT "
+                    + "CAST(COUNT(*) FILTER ( WHERE is_room_overqualified_for_class ) AS DECIMAL) "
+                    + "/ GREATEST(COUNT(*), 1) "
+                    + "FROM lecture "
+                    + "WHERE schedule_id = :scheduleId;"
+    )
+    float getPctOverqualifiedRoomsForLectures(long scheduleId);
 }

@@ -28,7 +28,8 @@ public class CalculateScoresJob {
         return new Score(
                 scheduleId,
                 lectureRepository.getPctOverflowingLectures(scheduleId),
-                lectureRepository.getNrUsedRooms(scheduleId)
+                lectureRepository.getNrUsedRooms(scheduleId),
+                lectureRepository.getPctOverqualifiedRoomsForLectures(scheduleId)
         );
     }
 }

@@ -8,15 +8,22 @@ public class Score {
 
     @Id
     private long id;
-    private long scheduleId;
+    private final long scheduleId;
 
-    private float pctOverflowingLectures;
-    private long nrUsedRooms;
+    private final float pctOverflowingLectures;
+    private final long nrUsedRooms;
+    private final float pctOverqualifiedRoomsForLectures;
 
-    public Score(long scheduleId, float pctOverflowingLectures, long nrUsedRooms) {
+    public Score(
+            long scheduleId,
+            float pctOverflowingLectures,
+            long nrUsedRooms,
+            float pctOverqualifiedRoomsForLectures
+    ) {
         this.scheduleId = scheduleId;
         this.pctOverflowingLectures = pctOverflowingLectures;
         this.nrUsedRooms = nrUsedRooms;
+        this.pctOverqualifiedRoomsForLectures = pctOverqualifiedRoomsForLectures;
     }
 
     public long getScheduleId() {
@@ -31,16 +38,20 @@ public class Score {
         return nrUsedRooms;
     }
 
+    public float getPctOverqualifiedRoomsForLectures() {
+        return pctOverqualifiedRoomsForLectures;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Score score = (Score) o;
-        return scheduleId == score.scheduleId && Float.compare(score.pctOverflowingLectures, pctOverflowingLectures) == 0 && nrUsedRooms == score.nrUsedRooms;
+        return scheduleId == score.scheduleId && Float.compare(score.pctOverflowingLectures, pctOverflowingLectures) == 0 && nrUsedRooms == score.nrUsedRooms && Float.compare(score.pctOverqualifiedRoomsForLectures, pctOverqualifiedRoomsForLectures) == 0;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(scheduleId, pctOverflowingLectures, nrUsedRooms);
+        return Objects.hash(scheduleId, pctOverflowingLectures, nrUsedRooms, pctOverqualifiedRoomsForLectures);
     }
 }
