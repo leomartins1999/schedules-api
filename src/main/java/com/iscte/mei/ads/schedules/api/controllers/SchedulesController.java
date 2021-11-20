@@ -3,6 +3,7 @@ package com.iscte.mei.ads.schedules.api.controllers;
 import com.iscte.mei.ads.schedules.api.deserializers.LectureListDeserializer;
 import com.iscte.mei.ads.schedules.api.entities.Lecture;
 import com.iscte.mei.ads.schedules.api.entities.Schedule;
+import com.iscte.mei.ads.schedules.api.entities.Score;
 import com.iscte.mei.ads.schedules.api.models.WriteLecture;
 import com.iscte.mei.ads.schedules.api.models.WriteSchedule;
 import com.iscte.mei.ads.schedules.api.services.SchedulesService;
@@ -52,23 +53,23 @@ public class SchedulesController {
     }
 
     @GetMapping(Paths.SCHEDULE_BY_ID_MAPPING)
-    public Schedule getScheduleById(@PathVariable long id) {
-        return service.getScheduleById(id);
+    public Schedule getScheduleById(@PathVariable long scheduleId) {
+        return service.getScheduleById(scheduleId);
     }
 
     @GetMapping(Paths.CLASSES_FOR_SCHEDULE_MAPPING)
-    public Iterable<String> getClassesForSchedule(@PathVariable long id) {
-        return service.getClassesForSchedule(id);
+    public Iterable<String> getClassesForSchedule(@PathVariable long scheduleId) {
+        return service.getClassesForSchedule(scheduleId);
     }
 
     @GetMapping(Paths.DATES_FOR_SCHEDULE_MAPPING)
-    public Iterable<String> getDatesForSchedule(@PathVariable long id) {
-        return service.getDatesForSchedule(id);
+    public Iterable<String> getDatesForSchedule(@PathVariable long scheduleId) {
+        return service.getDatesForSchedule(scheduleId);
     }
 
     @GetMapping(Paths.LECTURES_FOR_SCHEDULE_MAPPING)
     public List<Lecture> getLecturesForSchedule(
-            @PathVariable long id,
+            @PathVariable long scheduleId,
             @RequestParam String klass,
             @RequestParam(name = "start_date") String startDate,
             @RequestParam(name = "end_date") String endDate
@@ -76,12 +77,12 @@ public class SchedulesController {
         if (isQueryParameterInvalid(klass) || isQueryParameterInvalid(startDate) || isQueryParameterInvalid(endDate))
             throw new IllegalArgumentException();
 
-        return service.getLecturesForSchedule(id, klass, startDate, endDate);
+        return service.getLecturesForSchedule(scheduleId, klass, startDate, endDate);
     }
 
     @GetMapping(Paths.SCORES_FOR_SCHEDULE_MAPPING)
-    public Schedule getScoresForSchedule(@PathVariable String id) {
-        throw new IllegalStateException();
+    public Score getScoresForSchedule(@PathVariable long scheduleId) {
+        return service.getScoresForSchedule(scheduleId);
     }
 
     private boolean isQueryParameterInvalid(String value) {

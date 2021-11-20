@@ -2,6 +2,8 @@ package com.iscte.mei.ads.schedules.api.entities;
 
 import org.springframework.data.annotation.Id;
 
+import java.util.Objects;
+
 public class Score {
 
     @Id
@@ -21,5 +23,18 @@ public class Score {
 
     public float getPctOverflowingLectures() {
         return pctOverflowingLectures;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Score score = (Score) o;
+        return scheduleId == score.scheduleId && Float.compare(score.pctOverflowingLectures, pctOverflowingLectures) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(scheduleId, pctOverflowingLectures);
     }
 }
