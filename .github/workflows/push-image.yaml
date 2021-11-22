@@ -22,9 +22,12 @@ jobs:
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        uses: docker/metadata-action@v3
         with:
-          images: leomartins1999/schedules-api
+          images: leomartins1999/iscte-schedules-comparator
+          tags: |
+            type=raw,value=api-latest
+            type=semver,pattern=api-{{raw}}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
