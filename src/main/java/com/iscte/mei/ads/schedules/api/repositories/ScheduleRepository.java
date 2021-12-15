@@ -9,4 +9,7 @@ import java.util.List;
 public interface ScheduleRepository extends CrudRepository<Schedule, Long> {
     @Query("SELECT * FROM schedule WHERE status = 'CALCULATING';")
     List<Schedule> getCalculatingSchedules();
+
+    @Query("SELECT * FROM schedule ORDER BY name ASC;")
+    List<Schedule> getSchedulesOrderedByName();
 }
