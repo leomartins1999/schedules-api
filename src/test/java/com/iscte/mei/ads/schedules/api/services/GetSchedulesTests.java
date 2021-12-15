@@ -46,11 +46,10 @@ public class GetSchedulesTests {
     public void getScheduleTest() {
         Schedule schedule = repository.save(new Schedule("schedule-name"));
 
-        Iterable<Schedule> result = service.getSchedules();
+        List<Schedule> result = service.getSchedules();
 
-        List<Schedule> schedules = IterableUtils.iterableToList(result);
-        assertEquals(1, schedules.size());
-        assertEquals(schedule, schedules.get(0));
+        assertEquals(1, result.size());
+        assertEquals(schedule, result.get(0));
     }
 
     @Test
@@ -59,12 +58,26 @@ public class GetSchedulesTests {
         Schedule first = repository.save(new Schedule("schedule-first"));
         Schedule second = repository.save(new Schedule("schedule-second"));
 
-        Iterable<Schedule> result = service.getSchedules();
+        List<Schedule> result = service.getSchedules();
 
-        List<Schedule> schedules = IterableUtils.iterableToList(result);
-        assertEquals(2, schedules.size());
-        assertEquals(first, schedules.get(0));
-        assertEquals(second, schedules.get(1));
+        assertEquals(2, result.size());
+        assertEquals(first, result.get(0));
+        assertEquals(second, result.get(1));
+    }
+
+    @Test
+    @DisplayName("Schedules are ordered alphabetically")
+    public void alphabeticallyOrdered() {
+        Schedule cSchedule = repository.save(new Schedule("C-schedule"));
+        Schedule bSchedule = repository.save(new Schedule("B-schedule"));
+        Schedule aSchedule = repository.save(new Schedule("A-schedule"));
+
+        List<Schedule> result = service.getSchedules();
+
+        assertEquals(3, result.size());
+        assertEquals(aSchedule, result.get(0));
+        assertEquals(bSchedule, result.get(1));
+        assertEquals(cSchedule, result.get(2));
     }
 
 }

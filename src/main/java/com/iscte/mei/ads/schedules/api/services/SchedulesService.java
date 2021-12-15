@@ -44,8 +44,8 @@ public class SchedulesService {
         return s;
     }
 
-    public Iterable<Schedule> getSchedules() {
-        return scheduleRepository.findAll();
+    public List<Schedule> getSchedules() {
+        return scheduleRepository.getSchedulesOrderedByName();
     }
 
     public Schedule getScheduleById(long scheduleId) {
