@@ -4,6 +4,8 @@ import com.iscte.mei.ads.schedules.api.deserializers.LectureListDeserializer;
 import com.iscte.mei.ads.schedules.api.entities.Lecture;
 import com.iscte.mei.ads.schedules.api.entities.Schedule;
 import com.iscte.mei.ads.schedules.api.entities.Score;
+import com.iscte.mei.ads.schedules.api.interactor.GetPivotedScoresInteractor;
+import com.iscte.mei.ads.schedules.api.models.SchedulePivotedScores;
 import com.iscte.mei.ads.schedules.api.models.WriteLecture;
 import com.iscte.mei.ads.schedules.api.models.WriteSchedule;
 import com.iscte.mei.ads.schedules.api.services.SchedulesService;
@@ -28,10 +30,13 @@ public class SchedulesController {
 
     private final SchedulesService service;
 
+    private final GetPivotedScoresInteractor getPivotedScoresInteractor;
+
     private final LectureListDeserializer deserializer;
 
-    public SchedulesController(SchedulesService service, LectureListDeserializer deserializer) {
+    public SchedulesController(SchedulesService service, GetPivotedScoresInteractor getPivotedScoresInteractor, LectureListDeserializer deserializer) {
         this.service = service;
+        this.getPivotedScoresInteractor = getPivotedScoresInteractor;
         this.deserializer = deserializer;
     }
 
@@ -83,6 +88,11 @@ public class SchedulesController {
     @GetMapping(Paths.SCORES_FOR_SCHEDULE_MAPPING)
     public Score getScoresForSchedule(@PathVariable long scheduleId) {
         return service.getScoresForSchedule(scheduleId);
+    }
+
+    @GetMapping(Paths.PIVOTED_SCORES_FOR_SCHEDULE_MAPPING)
+    public SchedulePivotedScores getPivotedScoresForSchedule(@PathVariable long scheduleId) {
+        return getPivotedScoresInteractor.execute(scheduleId);
     }
 
     private boolean isQueryParameterInvalid(String value) {

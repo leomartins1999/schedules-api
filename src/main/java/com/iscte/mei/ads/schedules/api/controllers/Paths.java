@@ -10,5 +10,6 @@ public class Paths {
     public final static String DATES_FOR_SCHEDULE_MAPPING = SCHEDULE_BY_ID_MAPPING + "/dates";
     public final static String LECTURES_FOR_SCHEDULE_MAPPING = SCHEDULE_BY_ID_MAPPING + "/lectures";
     public final static String SCORES_FOR_SCHEDULE_MAPPING = SCHEDULE_BY_ID_MAPPING + "/scores";
+    public final static String PIVOTED_SCORES_FOR_SCHEDULE_MAPPING = SCHEDULE_BY_ID_MAPPING + "/pivoted-scores";
 
 }

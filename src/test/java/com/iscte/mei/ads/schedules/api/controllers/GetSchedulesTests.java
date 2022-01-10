@@ -2,6 +2,7 @@ package com.iscte.mei.ads.schedules.api.controllers;
 
 import com.iscte.mei.ads.schedules.api.deserializers.LectureListDeserializer;
 import com.iscte.mei.ads.schedules.api.entities.Schedule;
+import com.iscte.mei.ads.schedules.api.interactor.GetPivotedScoresInteractor;
 import com.iscte.mei.ads.schedules.api.services.SchedulesService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,6 +32,9 @@ public class GetSchedulesTests {
 
     @MockBean
     private LectureListDeserializer deserializer;
+
+    @MockBean
+    private GetPivotedScoresInteractor interactor;
 
     @Test
     @DisplayName("Gets no schedules")
