@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iscte.mei.ads.schedules.api.deserializers.LectureListDeserializer;
 import com.iscte.mei.ads.schedules.api.entities.Schedule;
+import com.iscte.mei.ads.schedules.api.interactor.GetPivotedScoresInteractor;
 import com.iscte.mei.ads.schedules.api.models.ScheduleFormat;
 import com.iscte.mei.ads.schedules.api.models.WriteSchedule;
 import com.iscte.mei.ads.schedules.api.services.SchedulesService;
@@ -37,6 +38,9 @@ public class CreateScheduleTests {
 
     @MockBean
     private LectureListDeserializer deserializer;
+
+    @MockBean
+    private GetPivotedScoresInteractor interactor;
 
     @Test
     @DisplayName("Creating valid schedule yields created")
